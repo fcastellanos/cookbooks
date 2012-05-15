@@ -1,6 +1,5 @@
 # Cooking with Vagrant, like a Chef.
 
-
 ![cooking-like-a-chef.png](https://github.com/mariozaizar/cookbooks/raw/master/images/cooking-like-a-chef.png)
 
 ## Afterwords
@@ -18,6 +17,13 @@ I started to play with it. I loved the idea of moving all my specific project se
 
 So many things changed since those days. Now, we have Vagrant 1.0, we have a new Ubuntu Precise box (sorry crappy Lucid64), Postgresql 9.1 is more likely now. Now, I'm responsible of all of the recipes from my [new project][billfloat], and we reduced the total new-setup-guide time, from almost a day to just 5 minutes (and it's virtualized remember :D) Doing the same stuff like before, but automatically, and virtualized. Using using Vagrant boxes for Linux, and [Chef-Solo][chef] recipes.
 
+## Why we should care about Chef & Vagrant?
+
+<http://youtu.be/5vzNzQzmAk0?hd=1>
+
+<iframe width="560" height="315" src="http://www.youtube.com/embed/5vzNzQzmAk0" frameborder="0" allowfullscreen></iframe>
+<object width="560" height="315"><param name="movie" value="http://www.youtube.com/v/5vzNzQzmAk0?version=3&amp;hl=es_ES"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/5vzNzQzmAk0?version=3&amp;hl=es_ES" type="application/x-shockwave-flash" width="560" height="315" allowscriptaccess="always" allowfullscreen="true"></embed></object>
+
 ## *Your first recipe.*
 
 I wrote a blog post about [how to install postgresql on vagrant][postgres] in the past.  
@@ -30,7 +36,7 @@ Both are free and multi platform, so no excuses.
 
 ![virtualbox-vagrant.png](https://github.com/mariozaizar/cookbooks/raw/master/images/virtualbox-vagrant.png)
 
-### The Vagrantfile
+## The Vagrantfile
 
 Vagrant uses a `Vagrantfile` to configure the box. We suggest to use one Vagrantfile per project. *So don't do nasty things like having all your projects running on the same box. Keep it clean.* At the end, you won't need more than one box running at the time isn't? why install everything on that? doesn't make sense.
 
@@ -70,7 +76,7 @@ Ok, now that we have the Vagrantfile, let's try to start our new virtualized lin
 
 > You will see the booting process log. Also (as green/red messages) the Chef-Solo execution. You will be notified if there is any problem starting the box, or applying the recipes. If you see anything in red, you're screwed.
 
-#### Vagrant ssh
+### Vagrant ssh
 
 At this point, you have a new Precise Ubuntu 64bits, ready. And all of our recipes where applied. Let's start a ssh session:
 
@@ -88,19 +94,19 @@ At this point, you have a new Precise Ubuntu 64bits, ready. And all of our recip
     vagrant status;
 ```
 
-#### The Cookbooks folder
+## The Cookbooks folder
 
 Vagrant use [Chef-Solo][chef] to apply the recipes commands inside the virtualized system. Chef use `cookbooks` folder to group similar the recipes by folders, for example the `databases` recipes, the `system` recipes, or whatever.
 
 Each recipe can handle multiple variations, like `databases::mysql` or `databases::postgres`, but it's up to you. We found that sometimes the most simple thing is have just one variation per recipe (the default). Keep it simple. *We suggest to store all the recipes inside the the `/project/cookbooks` folder.*
 
-#### The Recipes
+## The Recipes
 
 ![image](https://github.com/mariozaizar/cookbooks/raw/master/images/recipe.png)
 
 > Chef use three basic folders on every recipe, `files`, `recipes`, and `templates`. The recipes is just the commands to be executed, like "apt-get install", "copy", "mkdir" but using Chef syntaxis. The templates are files that can be interpolated, so it could have "variables" and replace values from them. Files are templates without any interpolation. Or whatever other file like images, commands, zip, files.
 
-### Learn how, make tasty things
+## Learn how, make tasty things
 
 Easy, just go to the [Opscode Chef-Solo reference](opscode) page.
 Take the examples, and try to use them to install your favorite service using Chef-Solo, Vagrant and Virtualbox.
