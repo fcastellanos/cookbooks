@@ -27,29 +27,9 @@ Vagrant::Config.run do |config|
 
     # TODO(mariozaizar) try to get this with File.read(attributes.json) or something.
     # Equivalent to attributes.json
-    chef.json = { 
-      "config": {
-          "host":"127.0.0.1",
-          "user":"root",
-          "password":"secret",
+    # chef.json = { "foo":"bar" }
 
-          "JAVAHOME":"/usr/lib/jvm/java-6-openjdk/jre/lib"
-      },
-      "run_list": [
-          "system",
-          "system::pimp",
-          "databases::postgres",  // 5432
-          "databases::mysql",     // 3306
-          "databases::mongodb",   // 27017
-          "frameworks::rails",    // 3000
-          "frameworks::sinatra",  // 4567
-          "jenkins"               // 7777
-          "memcached",            // 11211
-          "sphinx",               // 3312
-      ]
-    } )
-
-    chef.add_recipe "system",
+    chef.add_recipe "system"
     chef.add_recipe "system::pimp"
     chef.add_recipe "databases::postgres"  # 5432
     chef.add_recipe "databases::mysql"     # 3306
