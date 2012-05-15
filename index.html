@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Cookbooks by mariozaizar</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Cookbooks</h1>
+        <p>All my public Chef recipes used with Vagrant</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/mariozaizar/cookbooks" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/mariozaizar/cookbooks/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/mariozaizar/cookbooks/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>Cooking with Vagrant, like a Chef.</h1>
+
+<p><img src="https://github.com/mariozaizar/cookbooks/raw/master/images/cooking-like-a-chef.png" alt="cooking-like-a-chef.png"></p>
+
+<h2>Afterwords</h2>
+
+<p>Long time ago (almost like a year to be precisely) here in <a href="http://crowdint.com">Crowd</a> we traveled to the 2011'<a href="http://en.oreilly.com/rails2011">RailsConf</a> conferences in Baltimore. That week, I took all my credit cards and founds, and replaced my old laptop (switching from Linux to OSX).</p>
+
+<p>So, doing everything on my new laptop was hard. 8 years using linux, makes me confident on my *nix skills. But those days, I just felt stupid. I wasn't able to do nothing, installing annoying libraries like ImageMagic or even compile Ruby was horrible and painful. </p>
+
+<p>One day we met <a href="http://vagrantup.com">Vagrant</a>, and my first thought was:</p>
+
+<blockquote>
+<p>Well, this is great! it's like bundler doing my life easier, but for services. It's easy to install, and remove. 
+And I still use Linux!.. and it's virtualized wow!</p>
+</blockquote>
+
+<p>I started to play with it. I loved the idea of moving all my specific project servers and libs outside my personal OS, and be able to reuse my Linux settings and hacks. Keeping my personal system, clean and stable. No more nasty things like <a href="http://www.macports.org/">Mac Ports</a> to install linux-based services, or any of that shit.</p>
+
+<p>So many things changed since those days. Now, we have Vagrant 1.0, we have a new Ubuntu Precise box (sorry crappy Lucid64), Postgresql 9.1 is more likely now. Now, I'm responsible of all of the recipes from my <a href="http://billfloat.com">new project</a>, and we reduced the total new-setup-guide time, from almost a day to just 5 minutes (and it's virtualized remember :D) Doing the same stuff like before, but automatically, and virtualized. Using using Vagrant boxes for Linux, and <a href="http://wiki.opscode.com/display/chef/Resources">Chef-Solo</a> recipes.</p>
+
+<h2><em>Your first recipe.</em></h2>
+
+<p>I wrote a blog post about <a href="http://postgresql.org">how to install postgresql on vagrant</a> in the past.<br>
+btw, it was really awful (please don't read it). Let's try to fix that:</p>
+
+<h3>Requirements</h3>
+
+<p>Go and install: <a href="http://vagrantup.com">Vagrant</a> and <a href="https://www.virtualbox.org/">Virtualbox</a>.<br>
+Both are free and multi platform, so no excuses.</p>
+
+<p><img src="https://github.com/mariozaizar/cookbooks/raw/master/images/virtualbox-vagrant.png" alt="virtualbox-vagrant.png"></p>
+
+<h3>The Vagrantfile</h3>
+
+<p>Vagrant uses a <code>Vagrantfile</code> to configure the box. We suggest to use one Vagrantfile per project. <em>So don't do nasty things like having all your projects running on the same box. Keep it clean.</em> At the end, you won't need more than one box running at the time isn't? why install everything on that? doesn't make sense.</p>
+
+<pre><code>    # verify the vagrant installation (restart your shell if fails):
+    $ vagrant --version
+    Vagrant version 1.0.0
+
+    # create a new Vagrantfile:
+    $ vagrant init;
+    …
+    # see the current status
+    vagrant status;
+</code></pre>
+
+<p><em>**NOTE:</em>* Remove all the default-comments from the Vagrantfile (feels like the old apache.conf documentation, isn't it's).* Read them if you want, but at the end just leave:</p>
+
+<p><img src="https://github.com/mariozaizar/cookbooks/raw/master/images/vagrantfile.png" alt="image"></p>
+
+<p>So, it says:</p>
+
+<blockquote>
+<p>This box uses a <code>precise64</code> template box. If you don't have this template, download it from this <code>url</code>. This should use <code>33.33.33.10</code> ip address. We want to forward all the comunication from <code>33.33.33.10:80</code> to <code>127.0.0.1:80</code> (and 5432). Also, we use <code>Chef-Solo</code> to provision this box, please include the recipes called <code>system</code> and <code>postgres</code>. And make it fast! Pronto!</p>
+</blockquote>
+
+<h4>Vagrant up</h4>
+
+<p>Ok, now that we have the Vagrantfile, let's try to start our new virtualized linux, and apply those recipes.</p>
+
+<pre><code>    # turn on the machine!
+    vagrant up;
+    …
+    # should said running
+    vagrant status;
+</code></pre>
+
+<p><img src="https://github.com/mariozaizar/cookbooks/raw/master/images/chef.png" alt="image"></p>
+
+<blockquote>
+<p>You will see the booting process log. Also (as green/red messages) the Chef-Solo execution. You will be notified if there is any problem starting the box, or applying the recipes. If you see anything in red, you're screwed.</p>
+</blockquote>
+
+<h4>Vagrant ssh</h4>
+
+<p>At this point, you have a new Precise Ubuntu 64bits, ready. And all of our recipes where applied. Let's start a ssh session:</p>
+
+<pre><code>    vagrant ssh;
+    … 
+    # inside the virtual
+    uname -a;
+    exit;
+    …
+    # outside the virtual
+    vagrant halt;
+    … 
+    # should said halted (turned off)
+    vagrant status;
+</code></pre>
+
+<h4>The Cookbooks folder</h4>
+
+<p>Vagrant use <a href="http://wiki.opscode.com/display/chef/Resources">Chef-Solo</a> to apply the recipes commands inside the virtualized system. Chef use <code>cookbooks</code> folder to group similar the recipes by folders, for example the <code>databases</code> recipes, the <code>system</code> recipes, or whatever.</p>
+
+<p>Each recipe can handle multiple variations, like <code>databases::mysql</code> or <code>databases::postgres</code>, but it's up to you. We found that sometimes the most simple thing is have just one variation per recipe (the default). Keep it simple. <em>We suggest to store all the recipes inside the the <code>/project/cookbooks</code> folder.</em></p>
+
+<h4>The Recipes</h4>
+
+<p><img src="https://github.com/mariozaizar/cookbooks/raw/master/images/recipe.png" alt="image"></p>
+
+<blockquote>
+<p>Chef use three basic folders on every recipe, <code>files</code>, <code>recipes</code>, and <code>templates</code>. The recipes is just the commands to be executed, like "apt-get install", "copy", "mkdir" but using Chef syntaxis. The templates are files that can be interpolated, so it could have "variables" and replace values from them. Files are templates without any interpolation. Or whatever other file like images, commands, zip, files.</p>
+</blockquote>
+
+<h3>Learn how, make tasty things</h3>
+
+<p>Easy, just go to the <a href="opscode">Opscode Chef-Solo reference</a> page.
+Take the examples, and try to use them to install your favorite service using Chef-Solo, Vagrant and Virtualbox.</p>
+
+<p><img src="https://github.com/mariozaizar/cookbooks/raw/master/images/opscode.png" alt="image"></p>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/mariozaizar">mariozaizar</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+    
+  </body>
+</html>
