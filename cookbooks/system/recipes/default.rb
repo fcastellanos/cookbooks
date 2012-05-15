@@ -1,6 +1,6 @@
 # Update apt-get and locate
-# execute "apt-get update"
-# execute "updatedb" # locale
+execute "apt-get update"
+execute "updatedb"
 
 # Utilities
 package "build-essential" # make, gcc, headers
