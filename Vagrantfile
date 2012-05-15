@@ -5,6 +5,7 @@ Vagrant::Config.run do |config|
   # config.vm.boot_mode = :gui
   config.vm.box = "precise64"
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  # config.vm.boot_mode = :gui
 
   # ip address
   config.vm.network :hostonly, "33.33.33.10"
