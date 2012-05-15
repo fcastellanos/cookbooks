@@ -19,17 +19,15 @@ So many things changed since those days. Now, we have Vagrant 1.0, we have a new
 
 ## Why we should care about Chef & Vagrant?
 
-<http://youtu.be/5vzNzQzmAk0?hd=1>
-
-<iframe width="560" height="315" src="http://www.youtube.com/embed/5vzNzQzmAk0" frameborder="0" allowfullscreen></iframe>
-<object width="560" height="315"><param name="movie" value="http://www.youtube.com/v/5vzNzQzmAk0?version=3&amp;hl=es_ES"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/5vzNzQzmAk0?version=3&amp;hl=es_ES" type="application/x-shockwave-flash" width="560" height="315" allowscriptaccess="always" allowfullscreen="true"></embed></object>
+[ ![Video](https://github.com/mariozaizar/cookbooks/raw/master/images/video.png "RailsConf 2012") ](http://youtu.be/5vzNzQzmAk0?hd=1 "Video")
+> <http://youtu.be/5vzNzQzmAk0?hd=1>
 
 ## *Your first recipe.*
 
 I wrote a blog post about [how to install postgresql on vagrant][postgres] in the past.  
 btw, it was really awful (please don't read it). Let's try to fix that:
 
-### Requirements
+## Requirements
 
 Go and install: [Vagrant][vagrant] and [Virtualbox][virtualbox].  
 Both are free and multi platform, so no excuses.
@@ -60,7 +58,7 @@ So, it says:
 
 > This box uses a `precise64` template box. If you don't have this template, download it from this `url`. This should use `33.33.33.10` ip address. We want to forward all the comunication from `33.33.33.10:80` to `127.0.0.1:80` (and 5432). Also, we use `Chef-Solo` to provision this box, please include the recipes called `system` and `postgres`. And make it fast! Pronto!
 
-#### Vagrant up
+## Vagrant up
 
 Ok, now that we have the Vagrantfile, let's try to start our new virtualized linux, and apply those recipes.
 
@@ -76,7 +74,7 @@ Ok, now that we have the Vagrantfile, let's try to start our new virtualized lin
 
 > You will see the booting process log. Also (as green/red messages) the Chef-Solo execution. You will be notified if there is any problem starting the box, or applying the recipes. If you see anything in red, you're screwed.
 
-### Vagrant ssh
+## Vagrant ssh
 
 At this point, you have a new Precise Ubuntu 64bits, ready. And all of our recipes where applied. Let's start a ssh session:
 
