@@ -1,0 +1,21 @@
+{
+    "config": {
+        "host":"127.0.0.1",
+        "user":"root",
+        "password":"secret",
+
+        "JAVAHOME":"/usr/lib/jvm/java-6-openjdk/jre/lib"
+    },
+    "run_list": [
+        "system",
+        "system::pimp",
+        "databases::postgres",  // 5432
+        "databases::mysql",     // 3306
+        "databases::mongodb",   // 27017
+        "frameworks::rails",    // 3000
+        "frameworks::sinatra",  // 4567
+        "jenkins"               // 7777
+        "memcached",            // 11211
+        "sphinx",               // 3312
+    ]
+}
