@@ -106,7 +106,7 @@ Each recipe can handle multiple variations, like `databases::mysql` or `database
 
 ## Learn how, make tasty things
 
-Easy, just go to the [Opscode Chef-Solo reference](opscode) page.
+Easy, just go to the [Opscode Chef-Solo reference][opscode] page.
 Take the examples, and try to use them to install your favorite service using Chef-Solo, Vagrant and Virtualbox.
 
 ![image](https://github.com/mariozaizar/cookbooks/raw/master/images/opscode.png)
